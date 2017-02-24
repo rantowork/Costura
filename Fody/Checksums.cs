@@ -17,8 +17,9 @@ partial class ModuleWeaver
 
     static string CalculateChecksum(Stream stream)
     {
+        //Replacing SHA1Managed with SHA1Cng for FIPS Compliance
         using (var bs = new BufferedStream(stream))
-        using (var sha1 = new SHA1Managed())
+        using (var sha1 = new SHA1Cng())
         {
             var hash = sha1.ComputeHash(bs);
             var formatted = new StringBuilder(2*hash.Length);

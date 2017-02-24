@@ -60,9 +60,10 @@ static class Common
 
     public static string CalculateChecksum(string filename)
     {
+        
         using (var fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
         using (var bs = new BufferedStream(fs))
-        using (var sha1 = new SHA1Managed())
+        using (var sha1 = new SHA1Cng())
         {
             var hash = sha1.ComputeHash(bs);
             var formatted = new StringBuilder(2*hash.Length);
