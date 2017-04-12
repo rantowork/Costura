@@ -18,7 +18,7 @@ partial class ModuleWeaver
     static string CalculateChecksum(Stream stream)
     {
         using (var bs = new BufferedStream(stream))
-        using (var sha1 = new SHA1Managed())
+        using (var sha1 = new SHA1Cng())
         {
             var hash = sha1.ComputeHash(bs);
             var formatted = new StringBuilder(2*hash.Length);

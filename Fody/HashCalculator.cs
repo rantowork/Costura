@@ -15,17 +15,17 @@ partial class ModuleWeaver
             .SelectMany(r => r.FixedGetResourceData())
             .ToArray();
 
-        using (var md5 = MD5.Create())
-        {
-            var hashBytes = md5.ComputeHash(data);
+	    using (var sha1 = new SHA1CryptoServiceProvider())
+	    {
+			var hashBytes = sha1.ComputeHash(data);
 
-            var sb = new StringBuilder();
-            for (var i = 0; i < hashBytes.Length; i++)
-            {
-                sb.Append(hashBytes[i].ToString("X2"));
-            }
+			var sb = new StringBuilder();
+			for (var i = 0; i < hashBytes.Length; i++)
+			{
+				sb.Append(hashBytes[i].ToString("X2"));
+			}
 
-            resourcesHash = sb.ToString();
-        }
+			resourcesHash = sb.ToString();
+	    }
     }
 }
